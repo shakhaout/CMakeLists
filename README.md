@@ -3,9 +3,9 @@ Quick note for commands and related links for preparing CMakeLists.txt
 
 
 * set the CMake version as follows: (https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html#command:cmake_minimum_required)
-''''
+````
 cmake_minimum_required(VERSION 3.24.3)
-''''
+````
 # set the project name & version: (https://cmake.org/cmake/help/latest/command/project.html#command:project)
 project(Tutorial VERSION 1.0)
 
