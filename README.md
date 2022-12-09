@@ -28,7 +28,7 @@ configure_file(TutorialConfig.h.in TutorialConfig.h)
 ````
 add_library(MathFunctions mysqrt.cxx)
 ````
-_______________________________ CASE 1 _________________________________
+============================================ CASE 1 ========================================
 # To make use of the new library we will add an add_subdirectory() call in the top-level CMakeLists.txt file so that the library will get built. 
 # (https://cmake.org/cmake/help/latest/command/add_subdirectory.html#command:add_subdirectory)
 add_subdirectory(MathFunctions)
