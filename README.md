@@ -27,7 +27,7 @@ configure_file(TutorialConfig.h.in TutorialConfig.h)
 ````
 add_library(MathFunctions mysqrt.cxx)
 ````
-============================================ CASE 1 =============================================
+======================== CASE 1 =======================
 #### To make use of the new library we will add an add_subdirectory() call in the top-level CMakeLists.txt file so that the library will get built. https://cmake.org/cmake/help/latest/command/add_subdirectory.html#command:add_subdirectory
 ````
 add_subdirectory(MathFunctions)
@@ -44,15 +44,15 @@ target_include_directories(Tutorial PUBLIC
                            "${PROJECT_SOURCE_DIR}/MathFunctions"
                             )
 ````
-========================================= CASE 1 END ===================================================
+========================= CASE 1 END ========================
 
-========================================== CASE 2 =======================================================
+==================== CASE 2 ===============================
 ####  make the "MathFunctions" library optional, first step is to add an option to the top-level CMakeLists.txt file. https://cmake.org/cmake/help/latest/command/option.html#command:option
 #### "USE_MYMATH" controller need to be defined in TutorialConfig.h.in and can be used in tutorial.cxx script
 ````
 option(USE_MYMATH "Use tutorial provided math implementation" ON)
 ````
-=========================================== SUB CASE 2.1 ===================================================
+===================== SUB CASE 2.1 =========================
 #### When USE_MYMATH is ON, the lists will be generated and will be added to our project. When USE_MYMATH is OFF, the lists stay empty. 
 #### With this strategy, we allow users to toggle USE_MYMATH to manipulate what library is used in the build.
 ````
@@ -73,9 +73,9 @@ target_include_directories(Tutorial PUBLIC
                            ${EXTRA_INCLUDES}
                            ) 
 ````
-============================================= SUB CASE 2.1 END ===================================================
+=================== SUB CASE 2.1 END ========================
 
-============================================== SUB CASE 2.2 =======================================================
+================= SUB CASE 2.2 ==============================
 ####  modern CMake approach, "MathFunctions" will specify any needed include directories itself
 #### "Tutorial" simply needs to link to "MathFunctions" and not worry about any additional include directories.
 #### At the end of MathFunctions/CMakeLists.txt, use target_include_directories() with the INTERFACE keyword, 
@@ -98,11 +98,11 @@ target_include_directories(Tutorial PUBLIC
                            "${PROJECT_BINARY_DIR}"
                            )
 ````
-================================================= SUB CASE 2.2 END ================================================ 
+=================== SUB CASE 2.2 END ======================= 
 
-================================================== CASE 2 END =====================================================
+================== CASE 2 END ==============================
 
-==================================== USE CASES: ADDING GENERATOR EXPRESSIONS ========================================
+=========== USE CASES: ADDING GENERATOR EXPRESSIONS ==========
 #### Generator expressions may be used to enable conditional linking, conditional definitions used when compiling, conditional include directories and more.
 https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#manual:cmake-generator-expressions(7)
 #### first remove below two lines from CMakeLists.txt
@@ -129,7 +129,7 @@ target_link_libraries(MathFunctions tutorial_compiler_flags)
 #### With above modifications(line 84 - line 102), all of our code still requires C++ 11 to build. Notice though that with this method, it gives us the ability to be specific about which targets get specific requirements.
 #### In addition, we create a single source of truth in our interface library.
 
-========================== USE CASES: Adding Compiler Warning Flags with Generator Expressions ====================================
+===== USE CASES: Adding Compiler Warning Flags with Generator Expressions ======
 
 #### Update as to require at least CMake version 3.25:
 ````
@@ -157,9 +157,9 @@ target_compile_options(tutorial_compiler_flags INTERFACE
                        "$<${msvcc_cxx}:$<BUILD_INTERFACE:-W3>>"
                        )
  ````
-============================================ USE CASES END ===============================================================
+========= USE CASES END =======================
 
-=============================================== INSTALLING ===============================================================
+===================== INSTALLING =======================
 #### This step will install the appropriate header files, libraries, and executables.
 ````
 $ cmake --install .
@@ -191,9 +191,9 @@ install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h"
         DESTINATION include
         )
  ````
-============================================== INSTALLING END ========================================================
+============== INSTALLING END =====================
 
-============================================== TESTING ============================================================
+================ TESTING ==========================
 #### At the end of the top-level CMakeLists.txt file we first need to enable testing with the enable_testing() command.
 ````
 enable_testing()
@@ -237,7 +237,7 @@ do_test(Tutorial 25 "25 is 5")
 do_test(Tutorial -25 "-25 is (-nan|nan|0)")
 do_test(Tutorial 0.0001 "0.0001 is 0.01")
 ````
-================================== Adding Support for a Testing Dashboard =================================================
+========= Adding Support for a Testing Dashboard ===========
 ####  To include support for dashboards we include the CTest module in our top-level CMakeLists.txt. https://cmake.org/cmake/help/latest/guide/tutorial/Adding%20Support%20for%20a%20Testing%20Dashboard.html
 #### Replace CMakeLists.txt
 ````
@@ -267,12 +267,12 @@ $ ctest [-VV] -D Experimental
 ````
 $ ctest [-VV] -C Debug -D Experimental
 ````
-============================================== TESTING END ==========================================================
+=========== TESTING END ==============
 
 #### Adding System Introspection [https://cmake.org/cmake/help/latest/guide/tutorial/Adding%20System%20Introspection.html](https://cmake.org/cmake/help/latest/guide/tutorial/Adding%20System%20Introspection.html)
 #### Adding a Custom Command and Generated File [https://cmake.org/cmake/help/latest/guide/tutorial/Adding%20a%20Custom%20Command%20and%20Generated%20File.html](https://cmake.org/cmake/help/latest/guide/tutorial/Adding%20a%20Custom%20Command%20and%20Generated%20File.html)
 
-===================================== Packaging an Installer =====================================================
+============ Packaging an Installer ==============
 #### to provide both binary and source distributions on a variety of platforms.
 #### use CPack to create platform specific installers. Specifically we need to add a few lines to the bottom of our top-level CMakeLists.txt file. https://cmake.org/cmake/help/latest/guide/tutorial/Packaging%20an%20Installer.html
 ````
@@ -295,9 +295,9 @@ $ cpack -G ZIP -C Debug
 ````
 $ cpack --config CPackSourceConfig.cmake 
 ````
-============================================= Packaging an Installer END =======================================================
+=============== Packaging an Installer END =================
 
-==================================== Selecting Static or Shared Libraries ===================================================
+========== Selecting Static or Shared Libraries ==============
 #### https://cmake.org/cmake/help/latest/guide/tutorial/Selecting%20Static%20or%20Shared%20Libraries.html
 #### The first step is to update the starting section of the top-level CMakeLists.txt to look like:
 ````
@@ -397,13 +397,13 @@ install(TARGETS ${installable_libs} DESTINATION lib)
 # install include headers
 install(FILES MathFunctions.h DESTINATION include)
 ````
-============================== Selecting Static or Shared Libraries END =============================================
+============= Selecting Static or Shared Libraries END ===============
 
 #### Adding Export Configuration https://cmake.org/cmake/help/latest/guide/tutorial/Adding%20Export%20Configuration.html
 #### Packaging Debug and Release https://cmake.org/cmake/help/latest/guide/tutorial/Packaging%20Debug%20and%20Release.html
 
 
-========================================= User Interaction Guide =======================================================
+=============== User Interaction Guide ===========================
 #### https://cmake.org/cmake/help/latest/guide/user-interaction/index.html#
 
 #### A simple but typical use of cmake(1) with a fresh copy of software source code is to create a build directory and invoke cmake there:
