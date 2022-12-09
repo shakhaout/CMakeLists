@@ -2,28 +2,33 @@
 Quick note for commands and related links for preparing CMakeLists.txt
 
 
-* ## set the CMake version as follows: https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html#command:cmake_minimum_required
+#### set the CMake version as follows: https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html#command:cmake_minimum_required
 ````
 cmake_minimum_required(VERSION 3.24.3)
 ````
-# set the project name & version: (https://cmake.org/cmake/help/latest/command/project.html#command:project)
+#### set the project name & version: https://cmake.org/cmake/help/latest/command/project.html#command:project
+````
 project(Tutorial VERSION 1.0)
-
-# enable support for a specific C++ standard as follows: 
-# Make sure to add CMAKE_CXX_STANDARD declarations above the call to add_executable().
+````
+#### enable support for a specific C++ standard as follows: 
+#### Make sure to add CMAKE_CXX_STANDARD declarations above the call to add_executable().
+````
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-# executable of the main cpp file (https://cmake.org/cmake/help/latest/command/add_executable.html#command:add_executable)
+````
+#### executable of the main cpp file: https://cmake.org/cmake/help/latest/command/add_executable.html#command:add_executable
+````
 add_executable(Tutorial tutorial.cxx)
-
-# to copy the input file with the specified CMake variables replaced: (https://cmake.org/cmake/help/latest/command/configure_file.html#command:configure_file)
+````
+#### to copy the input file with the specified CMake variables replaced: https://cmake.org/cmake/help/latest/command/configure_file.html#command:configure_file
+````
 configure_file(TutorialConfig.h.in TutorialConfig.h)
-
-#  The source file for the library is passed as an argument (https://cmake.org/cmake/help/latest/command/add_library.html#command:add_library)
+````
+####  The source file for the library is passed as an argument: https://cmake.org/cmake/help/latest/command/add_library.html#command:add_library
+````
 add_library(MathFunctions mysqrt.cxx)
-
-########################################################################### CASE 1 ######################################################################################################
+````
+############################################ CASE 1 ##########################################################################
 # To make use of the new library we will add an add_subdirectory() call in the top-level CMakeLists.txt file so that the library will get built. 
 # (https://cmake.org/cmake/help/latest/command/add_subdirectory.html#command:add_subdirectory)
 add_subdirectory(MathFunctions)
